@@ -1,0 +1,53 @@
+@import "colors";
+
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+    background-color: $pastel-green;
+    color: $shark;
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: fantasy;
+    transition: all 0.3s;
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &.active {
+      // color: $pastel-green;
+      color: $golden-fizz;
+      background-color: $rebeccapurple;
+    }
+  }
+}
+
+.sidebar-item {
+  $color: $rebeccapurple;
+  $background: $golden-fizz;
+  background-color: $background;
+  padding: 1.4rem 1rem;
+  color: $color;
+  font-family: "Poppins Regular";
+  font-weight: bold;
+  transition: all 0.5s;
+  &:visited {
+    color: $color;
+  }
+
+  &:hover {
+    color: $background;
+    background: $color;
+    transform: scale(0.9);
+    border-radius: 0.5rem;
+  }
+}
