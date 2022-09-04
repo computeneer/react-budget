@@ -1,9 +1,7 @@
-import { IDataResponse, IErrorResponse } from "./../../models/IResponse";
+import { IDataResponse, IErrorResponse } from "../../models/IResponse";
 import httpStatus from "http-status";
 
 const BASE_URL = "http://localhost:5001/api";
-
-export const CATEGORIES = `${BASE_URL}/categories`;
 
 const makeRequest = <T>(
   url: string,
@@ -29,7 +27,6 @@ const makeRequest = <T>(
       resolve(result);
     } else {
       const result = (await response.json()) as IErrorResponse;
-      console.log(result);
       reject(result);
     }
   });

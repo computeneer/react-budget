@@ -1,6 +1,6 @@
 import ICategory from "../../models/ICategory";
 import { getRequest } from "./api";
 
-export const getAllCategories = (): Promise<ICategory[]> => {
+export const getAllCategories = () => {
   return getRequest<ICategory[]>("categories");
 };

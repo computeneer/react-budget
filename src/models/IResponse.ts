@@ -1,14 +1,18 @@
 interface IBaseResponse {
   status: number;
-  reason?: string | any;
 }
 
-export interface IResponse<T> extends IBaseResponse {
+export interface IErrorResponse extends IBaseResponse {
+  reason: string;
+}
+
+export interface IDataResponse<T> extends IBaseResponse {
   data?: T;
 }
 
 export interface ITokenResponse extends IBaseResponse {
   token?: string;
+  username?: string;
+  email?: string;
+  avatar?: string;
 }
-
-export default IResponse;

@@ -28,9 +28,16 @@ export const extraReducers = (builder: ActionReducerMapBuilder<IAuthState>) => {
       (state, action: PayloadAction<ITokenResponse>) => {
         if (action.payload.token) {
           sessionStorage.setItem("token", action.payload.token);
+          const user = {
+            username: action.payload.username!,
+            email: action.payload.email || "",
+            avatar: action.payload.avatar,
+          };
           state.isAuthenticated = true;
           state.isLoading = false;
           state.token = action.payload.token;
+          state.user = user;
+          sessionStorage.setItem("user", JSON.stringify(user));
         } else {
           state.isLoading = false;
           state.isAuthenticated = false;

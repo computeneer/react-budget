@@ -1,3 +1,4 @@
+import { IErrorResponse } from "./../../models/IResponse";
 import {
   ActionReducerMapBuilder,
   createAsyncThunk,
@@ -6,17 +7,18 @@ import {
 import { ICompanyProfitData } from "models/ICompany";
 import { getCompanyData } from "../api/companyApi;";
 import ICompanyState from "../states/ICompanyState";
-import { IResponse } from "models/IResponse";
+import { IDataResponse } from "models/IResponse";
 
-export const fetchCompanyProfitData = createAsyncThunk(
-  "companies/fetchCompanyProfitData",
-  async (companyCode: string) => {
-    const result = getCompanyData(companyCode)
-      .then((res) => res)
-      .catch((err) => err);
-    return result;
-  }
-);
+export const fetchCompanyProfitData = createAsyncThunk<
+  IDataResponse<ICompanyProfitData>,
+  string,
+  { rejectValue: IErrorResponse }
+>("companies/fetchCompanyProfitData", async (companyCode: string) => {
+  const result = getCompanyData(companyCode)
+    .then((res) => res)
+    .catch((err) => err);
+  return result;
+});
 
 export const extraReducers = (
   builder: ActionReducerMapBuilder<ICompanyState>
@@ -38,7 +40,7 @@ export const extraReducers = (
       fetchCompanyProfitData.fulfilled,
       (
         state: ICompanyState,
-        action: PayloadAction<IResponse<ICompanyProfitData>>
+        action: PayloadAction<IDataResponse<ICompanyProfitData>>
       ): void => {
         const { incomeTotal, incomeCount, paymentTotal, paymenyCount, total } =
           action.payload.data!;
@@ -59,6 +61,6 @@ export const extraReducers = (
       state.isLoading = false;
       state.isSuccessfull = false;
       state.hasError = true;
-      state.error = action.payload as string;
+      state.error = action.payload?.reason;
     });
 };
